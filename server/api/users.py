@@ -49,6 +49,11 @@ def login()
     user = user.to_dict()
     return jsonify(auth_token=auth_token, user=user)
 
+@user_routes.route("/logout")
+def load_musician():
+    session.pop(user, None)
+    return {'msg': 'Goodbye!'}, 200
+
 
 @user_routes.route("/session")
 def load_musician():
