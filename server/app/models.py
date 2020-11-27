@@ -18,13 +18,13 @@ class User(db.Model):
 class Medication(db.Model):
     __tablename__ = 'medications'
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id')
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(100), nullable=False)
-    morning = db.Column(Boolean, default=False)
-    afternoon = db.Column(Boolean, default=False)
-    bedtime = db.Column(Boolean, default=False)
-    users = db.relationship('User', backref='medications', lazy=True)
+    morning = db.Column(db.Boolean, default=False)
+    afternoon = db.Column(db.Boolean, default=False)
+    bedtime = db.Column(db.Boolean, default=False)
+    user = db.relationship('User', backref='medications', lazy=True)
 
     def to_dict(self):
         return {
@@ -34,7 +34,6 @@ class Medication(db.Model):
             "dosage": self.dosage,
             "morning": self.morning,
             "afternoon": self.afternoon,
-            "bedtime" = self.bedtime,
-        }
+            "bedtime": self.bedtime,
 
         }
