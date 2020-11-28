@@ -11,7 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 export default function UserPage () {
     const [myMeds, setMyMeds] = useState([])
     const currentUser = useSelector(state => state.auth.user)
-    const [med, setMed] = useState({userId: currentUser.id })
+    const [med, setMed] = useState({userId: currentUser.id, morning: false, afternoon: false, bedtime: false})
     const loadMeds = async () => {
         const res = await fetch(`/api/medication/${currentUser.id}`);
         if (res.ok) {
@@ -50,7 +50,7 @@ export default function UserPage () {
     const renderTime = (tod) => {
         let list1 = []
         for (let i=0; i < myMeds.length; i++) {
-            if (myMeds[0][tod] === true) {
+            if (myMeds[i][tod] === true) {
                 list1.push(
                     <div>
                         {myMeds[i].name}
@@ -87,7 +87,7 @@ export default function UserPage () {
                 <Checkbox
                 className="login-input"
                 placeholder="Morning"
-                onChange={e => setMed({...med, morning: true})}>
+                onChange={e => setMed({...med, morning: e.target.checked})}>
                 </Checkbox>}
                 label="Morning"
                 />
@@ -96,7 +96,7 @@ export default function UserPage () {
                 <Checkbox
                 className="login-input"
                 placeholder="Afternoon"
-                onChange={e => setMed({...med, afternoon: true})}>
+                onChange={e => setMed({...med, afternoon: e.target.checked})}>
                 </Checkbox>}
                 label="Afternoon"
                 />
@@ -105,7 +105,7 @@ export default function UserPage () {
                 <Checkbox
                 className="login-input"
                 placeholder="Bedtime"
-                onChange={e => setMed({...med, bedtime: true})}>
+                onChange={e => setMed({...med, bedtime: e.target.checked})}>
                 </Checkbox>}
                 label="Bedtime"
                 />
