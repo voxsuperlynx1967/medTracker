@@ -5,6 +5,8 @@ const rootReducer = combineReducers({
     auth
 })
 
+let storeEnhancer;
+
 if (process.env.NODE_ENV !== 'production') {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     storeEnhancer = composeEnhancers(applyMiddleware(thunk));

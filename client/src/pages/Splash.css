@@ -1,0 +1,12 @@
+form.loginform {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+
+.login-input {
+    margin-bottom: 5%;
+}

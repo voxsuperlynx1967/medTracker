@@ -110,7 +110,7 @@ export const signup = (email, password) => {
 export default function authReducer(state={}, action) {
     switch(action.type) {
       case SET_USER:
-        return action.musician;
+        return action.user;
       case REMOVE_USER:
         return {};
       default:

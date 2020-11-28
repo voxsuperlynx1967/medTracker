@@ -33,7 +33,7 @@ def signup():
     user = user.to_dict()
     return jsonify(auth_token(auth_token=auth_token, user=user))
 
-@user_routes.route('/login', methods=['PUT'])
+@user_routes.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     email = data['email']
@@ -44,11 +44,11 @@ def login():
         return jsonify(message='Password verify failed')
     else:
         auth_token = create_access_token(
-            identitiy={"email": user.email}
+            identity={"email": user.email}
         )
     session['user'] = user.to_dict()
-    user = user.to_dict()
-    return jsonify(auth_token=auth_token, user=user)
+    user1 = user.to_dict()
+    return jsonify(auth_token=auth_token, user=user1)
 
 @user_routes.route("/logout")
 def del_user():

@@ -2,11 +2,10 @@ import React, { useState, useEffect} from 'react'
 import { setUser } from './store/auth';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom'
-import './App.css';
 import Pages from './pages/Pages'
 
 function App() {
-  const [loading, setLoading] = useState(True)
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   useEffect(() => {
     const loadUser = async () => {
