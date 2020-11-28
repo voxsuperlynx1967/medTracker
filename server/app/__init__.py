@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, session
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -26,6 +27,6 @@ def inject_csrf_token(response):
     response.set_cookie('csrf_token',
         generate_csrf(),
         secure = True if os.environ.get('FLASK_ENV') else False,
-        samesite='Strict' if os.evniron.get('FLASK_ENV') else False,
+        samesite='Strict' if os.environ.get('FLASK_ENV') else False,
         httponly=True)
     return response
