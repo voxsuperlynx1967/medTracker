@@ -8,7 +8,7 @@ medication_routes = Blueprint('medication', __name__)
 def all(uid):
     if request.method == 'GET':
         meds = Medication.query.filter_by(userId=uid).all()
-        meddicts = [med.to_dict() for med in response]
+        meddicts = [med.to_dict() for med in meds]
         return {"medication": meddicts}
     if request.method =='POST':
         data = request.get_json()

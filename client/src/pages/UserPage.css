@@ -1,0 +1,4 @@
+.myMedContainer {
+    display: flex;
+    flex-direction: row;
+}
