@@ -10,8 +10,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default function UserPage () {
     const [myMeds, setMyMeds] = useState([])
-    const [med, setMed] = useState('')
     const currentUser = useSelector(state => state.auth.user)
+    const [med, setMed] = useState({userId: currentUser.id })
     const loadMeds = async () => {
         const res = await fetch(`/api/medication/${currentUser.id}`);
         if (res.ok) {
@@ -23,6 +23,27 @@ export default function UserPage () {
     useEffect(() => {
         loadMeds()
     }, []);
+    const addMeds = async () => {
+        const res = await fetch(`/api/medication/${currentUser.id}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(med)
+
+        })
+        const data = await res.json();
+        console.log(res.message)
+        loadMeds()
+    }
+    const handleSubmit = (e) => {
+        console.log(med)
+        e.preventDefault()
+        addMeds()
+
+    }
+
+
 
 
 
@@ -49,7 +70,7 @@ export default function UserPage () {
 
     return (
         <>
-            <form className="medform">
+            <form className="medform" onSubmit={handleSubmit}>
                 <div className="formtitle">Med Input</div>
                 <Input
                 className="login-input"
@@ -66,7 +87,7 @@ export default function UserPage () {
                 <Checkbox
                 className="login-input"
                 placeholder="Morning"
-                onChange={e => setMed({...med, morning: e.target.value})}>
+                onChange={e => setMed({...med, morning: true})}>
                 </Checkbox>}
                 label="Morning"
                 />
@@ -75,7 +96,7 @@ export default function UserPage () {
                 <Checkbox
                 className="login-input"
                 placeholder="Afternoon"
-                onChange={e => setMed({...med, afternoon: e.target.value})}>
+                onChange={e => setMed({...med, afternoon: true})}>
                 </Checkbox>}
                 label="Afternoon"
                 />
@@ -84,7 +105,7 @@ export default function UserPage () {
                 <Checkbox
                 className="login-input"
                 placeholder="Bedtime"
-                onChange={e => setMed({...med, bedtime: e.target.value})}>
+                onChange={e => setMed({...med, bedtime: true})}>
                 </Checkbox>}
                 label="Bedtime"
                 />

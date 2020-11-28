@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import Medication
+from app.models import db, Medication
 
 medication_routes = Blueprint('medication', __name__)
 
